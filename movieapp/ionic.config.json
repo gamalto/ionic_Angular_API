@@ -1,0 +1,8 @@
+{
+  "name": "movieapp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

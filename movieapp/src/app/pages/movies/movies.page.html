@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Search Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChange($event)"></ion-searchbar>
+  <ion-item>
+    <ion-label>
+      select search type </ion-label>
+    <ion-select [(ngModel)]="type" (ionChange)="searchChange($event)">
+      <ion-select-option vlue="">All</ion-select-option>
+      <ion-select-option vlue="Movies">Movies</ion-select-option>
+      <ion-select-option vlue="series">series</ion-select-option>
+      <ion-select-option vlue="episode">episode</ion-select-option>
+    </ion-select>
+
+  </ion-item>
+  <ion-list>
+    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/','movies', item.imdbID]">
+      <ion-avatar slot="start">
+        <img [src]="item.Poster" *ngIf="item.Poster != 'N/A'">
+      </ion-avatar>
+      <ion-label text-wrap>
+        <h3> {{item.Title}}</h3>
+        {{item.Year}}
+      </ion-label>
+      <ion-icon slot="end" *ngIf="item.Type == 'movie'" name="videocam-outline"></ion-icon>
+      <ion-icon slot="end" *ngIf="item.Type == 'series'" name="tv"></ion-icon>
+      <ion-icon slot="end" *ngIf="item.Type == 'game'" name="logo-game-controller-b"></ion-icon>
+
+    </ion-item>
+  </ion-list>
+</ion-content>
