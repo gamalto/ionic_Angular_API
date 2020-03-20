@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
 export enum searchType {
   all = '',
   movie = 'movie',
@@ -16,8 +15,8 @@ export enum searchType {
 })
 export class MovieService {
 
- url = 'http://www.omdbapi.com/';
- apikey = '';
+  url = 'http://www.omdbapi.com/';
+  apikey = '';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,9 +24,8 @@ export class MovieService {
     return this.httpClient.get(this.url + '' + this.apikey)
   }
 
-  searchData(title:string, type:searchType): Observable<any> 
-  {
-   
+  searchData(title: string, type: searchType): Observable<any> {
+
     return this.httpClient.get(`${this.url}?s=${encodeURI(title)}&type=${type}&apikey=${this.apikey}`)
       .pipe(
         map(results => {
@@ -36,10 +34,9 @@ export class MovieService {
           return results['Search'];
         })
       );
-    }
-    getDetail(id:any)
-    {
-      return this.httpClient.get(`${this.url}?i=${id}&plot=full&apikey=${this.apikey}`)
-    }
+  }
+  getDetail(id: any) {
+    return this.httpClient.get(`${this.url}?i=${id}&plot=full&apikey=${this.apikey}`)
+  }
 
 }
